@@ -52,7 +52,7 @@ public class Deque<Item> implements Iterable<Item> {
         last = new Node<>();
         last.item = item;
         if (oldLast == null) {
-            last = first;
+            first = last;
         }
         else {
             oldLast.next = last;
@@ -115,10 +115,9 @@ public class Deque<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args) {
         Deque<String> dq = new Deque<>();
-        dq.addFirst("a");
-        dq.addFirst("b");
+        dq.addLast("a");
+        dq.addLast("b");
         dq.removeFirst();
-        dq.removeLast();
 
         for (String item: dq) {
             StdOut.print(item + " ");
