@@ -1,53 +1,68 @@
 package hw2;
 
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private static final int INITIAL_CAPACITY = 8;
 
     private Item[] a;
-    private int size;
-    private int next;
+    private int n;
 
     public RandomizedQueue() {
         a = (Item[]) new Object[INITIAL_CAPACITY];
-        size = 0;
-        next = 0;
+        n = 0;
     }
 
     public int size() {
-        return size;
+        return n;
+    }
+
+    public boolean isEmpty() {
+        return n == 0;
     }
 
     public void resize(int capacity) {
-        assert size >= capacity;
+        assert n >= capacity;
         Item[] tmp = (Item[]) new Object[capacity];
-        int j = 0;
-        for (int i = 0; i < a.length; i++) {
-            if (a[j] != null) {
-                tmp[i] = a[j];
-                next = i + 1;
-            }
-            j++;
+        for (int i = 0; i < n; i++) {
+            tmp[i] = a[i];
         }
         a = tmp;
     }
 
     public void enqueue(Item item) {
         if (item == null) throw new IllegalArgumentException();
-        if (next == a.length) {
-            if (size < next / 2) {
-                resize(a.length); // Rearrange elements
-            }
-            else {
-                resize(a.length*2);
-            }
+        if (n == a.length) {
+            resize(a.length*2);
         }
-        a[next++] = item;
-        size++;
+        a[n++] = item;
     }
+
+    // Remove and return random item
+    public Item dequeue() {
+        if (isEmpty()) throw new NoSuchElementException();
+        int randId = StdRandom.uniform(0, n-1);
+        Item item = a[randId];
+        a[randId] = a[--n];
+        a[n] = null; // Avoid loitering
+        if (n <= a.length/4) {
+            resize(a.length/2);
+        }
+
+        return item;
+    }
+
+    public Item sample() {
+        if (isEmpty()) throw new NoSuchElementException();
+        int randId = StdRandom.uniform(0, n-1);
+        Item item = a[randId];
+        return item;
+    }
+
 
     private void print() {
         for (Item i: a) {
@@ -73,11 +88,31 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             rq.enqueue(i);
         }
         rq.print();
-        for (int i = 0; i < 8; i++) {
-            rq.enqueue(i);
-        }
-        rq.print();
+//        for (int i = 0; i < 8; i++) {
+//            rq.enqueue(i);
+//        }
+//        rq.print();
+//        rq.enqueue(10);
+//        rq.print();
+//        rq.print();
+//        for (int i = 0; i < 8; i++) {
+//            rq.enqueue(i);
+//        }
+////        for (int i = 0; i < 20; i++) {
+////            rq.dequeue();
+////        }
+//        rq.print();
+        rq.dequeue();
+        rq.dequeue();
+        rq.dequeue();
+        rq.dequeue();
+        rq.dequeue();
+        rq.dequeue();
+//        rq.dequeue();
         rq.enqueue(10);
+        rq.enqueue(11);
+        rq.enqueue(12);
         rq.print();
+        StdOut.print(rq.sample());
     }
 }
