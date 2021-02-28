@@ -7,17 +7,21 @@ import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
     private class Node<Item> {
-        Item item;
-        Node<Item> next;
-        Node<Item> prev;
+        private Item item;
+        private Node<Item> next;
+        private Node<Item> prev;
     }
 
-    Node<Item> first = null;
-    Node<Item> last = null;
-    int size = 0;
+    private Node<Item> first;
+    private Node<Item> last;
+    private int size;
 
     // construct an empty deque
-    public Deque() {}
+    public Deque() {
+        first = null;
+        last = null;
+        size = 0;
+    }
 
     // is the deque empty?
     public boolean isEmpty() {
@@ -106,22 +110,67 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
             Item item = curr.item;
             curr = curr.next;
             return item;
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    private void printDeque() {
+        for (Item item: this) {
+            StdOut.print(item + " ");
+        }
+        StdOut.println();
     }
 
     // unit testing (required)
     public static void main(String[] args) {
         Deque<String> dq = new Deque<>();
-        dq.addLast("a");
-        dq.addLast("b");
-        dq.removeFirst();
 
-        for (String item: dq) {
-            StdOut.print(item + " ");
+        StdOut.println("-- Test addFirst and addLast --");
+        for (int i = 0; i < 10; i++) {
+            dq.addFirst(String.valueOf(i));
         }
-        StdOut.println();
+        for (int i = 0; i < 10; i++) {
+            dq.addLast(String.valueOf(i));
+        }
+        StdOut.println("After adding elements");
+        dq.printDeque();
+
+        StdOut.println("-- Test iterator --");
+        Iterator<String> it = dq.iterator();
+        StdOut.println("Next item: " + it.next());
+        StdOut.println("Next item: " + it.next());
+        StdOut.println("Next item: " + it.next());
+
+        StdOut.println("-- Test removeFirst and removeLast --");
+        StdOut.println("Size : " + dq.size());
+        StdOut.println("Before remove");
+        dq.printDeque();
+        for (int i = 0; i < 5; i++) {
+            dq.removeFirst();
+        }
+        StdOut.println("After removeFirst 5 times");
+        dq.printDeque();
+        StdOut.println("Size : " + dq.size());
+        StdOut.println("Is queue empty : " + dq.isEmpty());
+        for (int i = 0; i < 15; i++) {
+            dq.removeLast();
+        }
+        StdOut.println("After removeLast 15 times");
+        dq.printDeque();
+        StdOut.println("Is queue empty : " + dq.isEmpty());
+
+//        Check Exception
+//        dq.removeFirst();
+//        dq.removeLast();
+//        Iterator<String> it = dq.iterator();
+//        StdOut.println("Next item: " + it.next());
     }
 }
