@@ -1,3 +1,5 @@
+package hw2;
+
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Iterator;
@@ -110,18 +112,13 @@ public class Deque<Item> implements Iterable<Item> {
         }
     }
 
-//    public String toString() {
-//        for (Item item: this) {
-//
-//        }
-//    }
-
     // unit testing (required)
     public static void main(String[] args) {
         Deque<String> dq = new Deque<>();
         dq.addFirst("a");
         dq.addFirst("b");
         dq.removeFirst();
+        dq.removeLast();
 
         for (String item: dq) {
             StdOut.print(item + " ");

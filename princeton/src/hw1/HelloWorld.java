@@ -1,3 +1,5 @@
+package hw1;
+
 /******************************************************************************
  *  Compilation:  javac HelloWorld.java
  *  Execution:    java HelloWorld
