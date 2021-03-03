@@ -77,17 +77,56 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     @Override
     public Iterator<Item> iterator() {
-        return null;
+        return new RandomizedQueueIterator();
+    }
+
+    private class RandomizedQueueIterator implements Iterator<Item> {
+        private int curr;
+        private Item[] tmp;
+        public RandomizedQueueIterator() {
+            curr = 0;
+            tmp = (Item[]) new Object[n];
+            for (int i = 0; i < n; i++) {
+                tmp[i] = a[i];
+            }
+            StdRandom.shuffle(tmp);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return curr < n;
+        }
+
+        @Override
+        public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            Item item = tmp[curr++];
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
     public static void main(String[] args) {
         RandomizedQueue<Integer> rq = new RandomizedQueue<>();
 
         StdOut.println("-- Test Enqueue and Resize --");
-        for (int i = 0; i < 8; i++) {
+        for (int i = 1; i <= 5; i++) {
             rq.enqueue(i);
         }
+
         rq.print();
+        rq.enqueue(6);
+
+        for (int a: rq) {
+            for (int b: rq) {
+                StdOut.print(a + " - " + b + " ");
+            }
+            StdOut.println();
+        }
 //        for (int i = 0; i < 8; i++) {
 //            rq.enqueue(i);
 //        }
@@ -102,17 +141,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 ////            rq.dequeue();
 ////        }
 //        rq.print();
-        rq.dequeue();
-        rq.dequeue();
-        rq.dequeue();
-        rq.dequeue();
-        rq.dequeue();
-        rq.dequeue();
 //        rq.dequeue();
-        rq.enqueue(10);
-        rq.enqueue(11);
-        rq.enqueue(12);
-        rq.print();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.enqueue(10);
+//        rq.enqueue(11);
+//        rq.enqueue(12);
+//        rq.print();
         StdOut.print(rq.sample());
     }
+
 }
