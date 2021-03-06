@@ -127,31 +127,21 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             }
             StdOut.println();
         }
-//        for (int i = 0; i < 8; i++) {
-//            rq.enqueue(i);
-//        }
-//        rq.print();
-//        rq.enqueue(10);
-//        rq.print();
-//        rq.print();
-//        for (int i = 0; i < 8; i++) {
-//            rq.enqueue(i);
-//        }
-////        for (int i = 0; i < 20; i++) {
-////            rq.dequeue();
-////        }
-//        rq.print();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.dequeue();
-//        rq.enqueue(10);
-//        rq.enqueue(11);
-//        rq.enqueue(12);
-//        rq.print();
+        for (int i = 0; i < 8; i++) {
+            rq.enqueue(i);
+        }
+        rq.print();
+        rq.enqueue(10);
+        rq.print();
+        rq.print();
+        for (int i = 0; i < 8; i++) {
+            rq.enqueue(i);
+        }
+        rq.print();
+        rq.dequeue();
+        rq.dequeue();
+        rq.enqueue(10);
+        rq.print();
         StdOut.print(rq.sample());
     }
 
