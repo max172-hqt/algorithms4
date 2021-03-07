@@ -1,5 +1,3 @@
-package hw2;
-
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -25,7 +23,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return n == 0;
     }
 
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         assert n >= capacity;
         Item[] tmp = (Item[]) new Object[capacity];
         for (int i = 0; i < n; i++) {
