@@ -1,3 +1,5 @@
+//package hw2;
+
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -43,6 +45,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // Remove and return random item
     public Item dequeue() {
         if (isEmpty()) throw new NoSuchElementException();
+        if (n == 1) {
+            Item item = a[--n];
+            a[n] = null;
+            return item;
+        }
+
         int randId = StdRandom.uniform(0, n-1);
         Item item = a[randId];
         a[randId] = a[--n];
@@ -111,36 +119,38 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public static void main(String[] args) {
         RandomizedQueue<Integer> rq = new RandomizedQueue<>();
 
-        StdOut.println("-- Test Enqueue and Resize --");
-        for (int i = 1; i <= 5; i++) {
-            rq.enqueue(i);
-        }
-
-        rq.print();
-        rq.enqueue(6);
-
-        for (int a: rq) {
-            for (int b: rq) {
-                StdOut.print(a + " - " + b + " ");
-            }
-            StdOut.println();
-        }
-        for (int i = 0; i < 8; i++) {
-            rq.enqueue(i);
-        }
-        rq.print();
-        rq.enqueue(10);
-        rq.print();
-        rq.print();
-        for (int i = 0; i < 8; i++) {
-            rq.enqueue(i);
-        }
-        rq.print();
+//        StdOut.println("-- Test Enqueue and Resize --");
+//        for (int i = 1; i <= 5; i++) {
+//            rq.enqueue(i);
+//        }
+//
+//        rq.print();
+//        rq.enqueue(6);
+//
+//        for (int a: rq) {
+//            for (int b: rq) {
+//                StdOut.print(a + " - " + b + " ");
+//            }
+//            StdOut.println();
+//        }
+//        for (int i = 0; i < 8; i++) {
+//            rq.enqueue(i);
+//        }
+//        rq.print();
+//        rq.enqueue(10);
+//        rq.print();
+//        rq.print();
+//        for (int i = 0; i < 8; i++) {
+//            rq.enqueue(i);
+//        }
+//        rq.print();
+//        rq.dequeue();
+//        rq.dequeue();
+//        rq.enqueue(10);
+//        rq.print();
+//        StdOut.print(rq.sample());
+//    }
+        rq.enqueue(2);
         rq.dequeue();
-        rq.dequeue();
-        rq.enqueue(10);
-        rq.print();
-        StdOut.print(rq.sample());
     }
-
 }
