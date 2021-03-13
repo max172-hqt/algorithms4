@@ -1,4 +1,4 @@
-//package hw2;
+package hw2;
 
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
@@ -51,7 +51,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             return item;
         }
 
-        int randId = StdRandom.uniform(0, n-1);
+        int randId = StdRandom.uniform(0, n);
         Item item = a[randId];
         a[randId] = a[--n];
         a[n] = null; // Avoid loitering
@@ -64,7 +64,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item sample() {
         if (isEmpty()) throw new NoSuchElementException();
-        int randId = StdRandom.uniform(0, n-1);
+        if (n == 1) {
+            return a[0];
+        }
+        int randId = StdRandom.uniform(0, n);
         Item item = a[randId];
         return item;
     }
