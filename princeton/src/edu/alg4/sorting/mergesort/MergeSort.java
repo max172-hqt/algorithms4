@@ -9,7 +9,7 @@ public class MergeSort {
 
     public static void bottomUpSort(Comparable[] a) {
         aux = new Comparable[a.length];
-        int n = a.length - 1;
+        int n = a.length;
         for (int sz = 1; sz < n; sz = sz+sz) {
             for (int lo = 0; lo < n-sz; lo += sz+sz) {
                 merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, n-1));
