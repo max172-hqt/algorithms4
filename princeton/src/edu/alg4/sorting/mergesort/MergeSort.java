@@ -31,6 +31,7 @@ public class MergeSort {
     }
 
     private static void merge(Comparable[] a, int lo, int mid, int hi) {
+        // Copy
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
         }
