@@ -77,9 +77,9 @@ public class Point implements Comparable<Point> {
         return Integer.compare(this.x, that.x);
     }
 
-    private static boolean less(Point a, Point b) {
-        return a.compareTo(b) < 0;
-    }
+//    private static boolean less(Point a, Point b) {
+//        return a.compareTo(b) < 0;
+//    }
 
     /**
      * Compares two points by the slope they make with this point.
@@ -89,19 +89,13 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-        return new SlopeOrderComparator(this);
+        return new SlopeOrderComparator();
     }
 
-    private static class SlopeOrderComparator implements Comparator<Point> {
-        private final Point o;
-
-        public SlopeOrderComparator(Point point) {
-            o = point;
-        }
-
+    private class SlopeOrderComparator implements Comparator<Point> {
         @Override
         public int compare(Point p, Point q) {
-            return Double.compare(o.slopeTo(p), o.slopeTo(q));
+            return Double.compare(Point.this.slopeTo(p), Point.this.slopeTo(q));
         }
     }
 
@@ -128,10 +122,12 @@ public class Point implements Comparable<Point> {
         StdDraw.setPenRadius(0.025);
         StdDraw.setPenColor(StdDraw.BLUE);
         StdDraw.setScale(-10, 10);
-        p.draw();
-        q.draw();
-        s.draw();
-        Comparator<Point> cp = p.slopeOrder();
-        StdOut.println(cp.compare(q, s));
+//        p.draw();
+//        q.draw();
+//        s.draw();
+//        Comparator<Point> cp = p.slopeOrder();
+//        StdOut.println(cp.compare(q, s));
+        LineSegment ls = new LineSegment(p, q);
+        ls.draw();
     }
 }
